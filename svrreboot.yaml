@@ -1,7 +1,7 @@
 ---
 - name: Reboot servers with specific users
   hosts: "{{ server_name }}"  # Use the variable passed for the server name
-  remote_user: "{{ ansible_user }}"  # This will use the username specified in the hosts file
+  #remote_user: "{{ ansible_user }}"  # This will use the username specified in the hosts file
   become: yes  # Don't use sudo or become root
   tasks:
     - name: Reboot the server
