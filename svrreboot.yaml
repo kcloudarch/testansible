@@ -1,0 +1,13 @@
+---
+- name: Reboot a specific server
+  hosts: "{{ server_name }}"  # Use the variable 'server_name' passed in
+  become: yes                 # Run as root (or with sudo) if necessary
+  tasks:
+    - name: Reboot the server
+      ansible.builtin.reboot:
+        reboot_timeout: 60    # Timeout for rebooting
+        test_command: whoami   # Command to test if the server is back online
+      register: reboot_result
+      until: reboot_result is success
+      retries: 3
+      delay: 10
