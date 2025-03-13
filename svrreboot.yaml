@@ -1,7 +1,8 @@
 ---
-- name: Reboot a specific server
-  hosts: "{{ server_name }}"  # Use the variable 'server_name' passed in
-  become: yes                 # Run as root (or with sudo) if necessary
+- name: Reboot servers with specific users
+  hosts: "{{ server_name }}"  # Use the variable passed for the server name
+  remote_user: "{{ ansible_user }}"  # This will use the username specified in the hosts file
+  become: no  # Don't use sudo or become root
   tasks:
     - name: Reboot the server
       ansible.builtin.reboot:
